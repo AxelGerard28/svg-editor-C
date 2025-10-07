@@ -1,4 +1,4 @@
-CC := gcc
+CC := gcc 
 FLAGS := -std=c99 -Wall -Werror -Wextra
 
 build:
