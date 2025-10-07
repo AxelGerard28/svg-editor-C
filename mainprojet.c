@@ -1,61 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Formes/Cercle/cercle.h"
+#include "Formes/Rectangle/rectangle.h"
+#include "Formes/Carre/carre.h"
+#include "Formes/Ellipse/ellipse.h"
+#include "Formes/Ligne/ligne.h"
+#include "Formes/Enchlignes/enchlignes.h"
+#include "Formes/Polygone/polygone.h"
+#include "Formes/Trajectoire/trajectoire.h"
+#include "Formes/Groupe/groupe.h"
 
 
-typedef enum
-{
-    SQUARE,
-    RECTANGLE,
-    CIRCLE
-}TypesFormes;
 
-typedef struct
-{
-    TypesFormes type;
-    int x;
-    int y;
-    int h;
-    int l;
-    int r;
-}Dimensions;
+#define RED "\033[31m"
+#define RESET "\033[0m"
+#define GREEN "\033[32m"
 
 int main(void)
 {
     int formes;
-    printf("what do you want ?\n");
-    printf(" -1 pour un cercle\n -2 pour une ellipse\n -3 pour un carré\n -4 pour un rectangle");
+    printf(RED"selectionne une forme:\n");
+    printf(GREEN" -1 pour un cercle\n -2 pour une ellipse\n -3 pour un carré\n -4 pour un rectangle\n");
     printf(" -5 pour une ligne\n -6 pour un enchainement de lignes\n -7 pour un polygone\n -8 pour une trajectoire\n");
-    printf(" -9 pour les groupes\n");
+    printf(" -9 pour les groupes\n"RESET);
     scanf(" %d", &formes);
 
     switch (formes)
+
     {
     case 1:
-        printf("tu as choisi un cercle\n");
+        cercle();
         break;
     case 2:
-        printf("tu as choisi une ellipse\n");
+        ellipse();
         break;
     case 3:
-        printf("tu as choisi un carré\n");
+        carre();
         break;
      case 4:
-        printf("tu as choisi un rectangle\n");
+        rectangle();
         break;
     case 5:
-        printf("tu as choisi une ligne\n");
+        ligne();
         break;
     case 6:
-        printf("tu as choisi un enchainement de lignes\n");
+        enchlignes();
         break;
     case 7:
-        printf("tu as choisi un polygone\n");
+        polygone();
         break;
     case 8:
-        printf("tu as choisi une trajectoire\n");
+        trajectoire();
         break;
     case 9: 
-        printf("tu as choisi une trajectoire\n");
+        groupe();
         break;
     default:
         printf("ceci n'existe pas\n");
