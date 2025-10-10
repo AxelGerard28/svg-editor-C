@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "carre.h"
 #include "structure.h"
+#include "formes.h"
 
-Carre carre()
+Formes lesformes()
+{
+    printf("hello,world\n");
+    Carre carre();
 {
     Carre c;
     int placement;
@@ -30,5 +32,7 @@ Carre carre()
         
     
     }
-    return c;
+    return CARRE;
+}
+
 }

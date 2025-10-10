@@ -1,7 +1,6 @@
 {
     "files.associations": {
-        "stdlib.h": "c",
-        "stdio.h": "c",
-        "enchainementdeligne.h": "c"
+        "structure.h": "c",
+        "stdio.h": "c"
     }
 }

@@ -12,14 +12,13 @@ SRC = mainprojet.c \
 	Formes/Enchlignes/enchlignes.c \
 	Formes/Polygone/polygone.c \
 	Formes/Trajectoire/trajectoire.c \
-	Formes/Groupe/groupe.c
+	Formes/Groupe/groupe.c \
+	Formes/Formes/formes.c
 
 OBJ = $(SRC:.c=.o)
 
 # Nom de l'exécutable
 EXEC = main
-
-# === Règles ===
 
 # Compilation complète
 build: $(EXEC)

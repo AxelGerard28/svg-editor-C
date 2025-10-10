@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Formes/Formes/formes.h"
+#include "Formes/structure.h"
+
 #include "Formes/Cercle/cercle.h"
 #include "Formes/Rectangle/rectangle.h"
-#include "Formes/Carre/carre.h"
+
 #include "Formes/Ellipse/ellipse.h"
 #include "Formes/Ligne/ligne.h"
 #include "Formes/Enchlignes/enchlignes.h"
@@ -19,15 +22,18 @@
 int main(void)
 {
     int formes;
-    printf(RED"selectionne une forme:\n");
-    printf(GREEN" -1 pour un cercle\n -2 pour une ellipse\n -3 pour un carré\n -4 pour un rectangle\n");
-    printf(" -5 pour une ligne\n -6 pour un enchainement de lignes\n -7 pour un polygone\n -8 pour une trajectoire\n");
-    printf(" -9 pour les groupes\n"RESET);
+    printf(RED "Sélectionne une forme (0 pour quitter) :\n" RESET);
+    printf(GREEN " 1  - Cercle\n 2  - Ellipse\n 3  - Carré\n 4  - Rectangle\n"
+                     " 5  - Ligne\n 6  - Enchaînement de lignes\n 7  - Polygone\n"
+                     " 8  - Trajectoire\n 9  - Groupe\n" RESET);
+    printf("ton choix :");
     scanf(" %d", &formes);
-
+    
     switch (formes)
-
     {
+    case 0:
+        lesformes();
+        break;
     case 1:
         cercle();
         break;
@@ -56,7 +62,7 @@ int main(void)
         groupe();
         break;
     default:
-        printf("ceci n'existe pas\n");
+        printf("ceci n'existe pas : %d\n", formes);
         break;
-    }
+   }
 }
