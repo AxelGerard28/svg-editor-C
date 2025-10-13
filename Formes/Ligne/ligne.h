@@ -3,7 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "structure.h"
 
-void ligne();
+Ligne ligne();
 
 #endif

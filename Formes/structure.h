@@ -4,14 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum 
+typedef enum
 {
     CARRE,
     RECTANGLE,
     CERCLE,
     ELLIPSE,
     LIGNE
-}Formes;
+}TypesFormes;
 
 typedef struct 
 {
@@ -51,6 +51,20 @@ typedef struct
     int x2;
     int y2;
 }Ligne;
+
+typedef struct 
+{
+    TypesFormes types;
+    union
+    {
+        Carre carre;
+        Rectangle rectangle;
+        Cercle cercle;
+        Ellipse ellipse;
+        Ligne ligne;
+    }Data;
+}Formes;
+
 
 
 #endif

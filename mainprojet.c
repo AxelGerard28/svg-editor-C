@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Formes/Formes/formes.h"
 #include "Formes/structure.h"
 
 #include "Formes/Cercle/cercle.h"
 #include "Formes/Rectangle/rectangle.h"
-
+#include "Formes/Carre/carre.h"
 #include "Formes/Ellipse/ellipse.h"
 #include "Formes/Ligne/ligne.h"
 #include "Formes/Enchlignes/enchlignes.h"
@@ -23,16 +22,19 @@ int main(void)
 {
     int formes;
     printf(RED "Sélectionne une forme (0 pour quitter) :\n" RESET);
-    printf(GREEN " 1  - Cercle\n 2  - Ellipse\n 3  - Carré\n 4  - Rectangle\n"
-                     " 5  - Ligne\n 6  - Enchaînement de lignes\n 7  - Polygone\n"
-                     " 8  - Trajectoire\n 9  - Groupe\n" RESET);
+    printf(GREEN " 1  - Cercle\n" 
+                 " 2  - Ellipse\n"
+                 " 3  - Carré\n"
+                 " 4  - Rectangle\n"
+                 " 5  - Ligne\n " RESET);
+                  
     printf("ton choix :");
     scanf(" %d", &formes);
     
     switch (formes)
     {
     case 0:
-        lesformes();
+        printf("abandon\n");
         break;
     case 1:
         cercle();
@@ -48,18 +50,6 @@ int main(void)
         break;
     case 5:
         ligne();
-        break;
-    case 6:
-        enchlignes();
-        break;
-    case 7:
-        polygone();
-        break;
-    case 8:
-        trajectoire();
-        break;
-    case 9: 
-        groupe();
         break;
     default:
         printf("ceci n'existe pas : %d\n", formes);

@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "structure.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "formes.h": "c",
+        "cercle.h": "c",
+        "stdlib.h": "c"
     }
 }
