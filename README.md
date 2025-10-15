@@ -14,16 +14,16 @@
 - **chemins**
 
 
-# compilation
+## compilation
 
 pour compiler il vous suffit d'utiliser la commande **make build** dans le terminale.
 
-# executer
+## executer
 
-pour executer il vous suffit d'utiliser la commande ./main dans le terminale.
+pour executer il vous suffit d'utiliser la commande **./main dans** le terminale.
 
 
-# ce que ce projet m'a permis de faire
+### ce que ce projet m'a permis de faire
 
 - utiliser les structures, les listes
 - utiliser l'allocations mémoire
