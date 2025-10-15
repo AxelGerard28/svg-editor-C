@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "structure.h"
 
-Ligne ligne();
+Ligne* create_line(void);
+void free_line(Ligne* ligne);
 
 #endif

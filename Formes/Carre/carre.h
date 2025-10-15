@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "structure.h"
 
-Carre carre();
+Carre* create_square(void);
+void free_square(Carre* carre);
 
 #endif

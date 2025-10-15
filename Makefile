@@ -12,7 +12,8 @@ SRC = mainprojet.c \
 	Formes/Enchlignes/enchlignes.c \
 	Formes/Polygone/polygone.c \
 	Formes/Trajectoire/trajectoire.c \
-	Formes/Groupe/groupe.c 
+	Formes/Groupe/groupe.c \
+	Formes/liste.c
 
 OBJ = $(SRC:.c=.o)
 

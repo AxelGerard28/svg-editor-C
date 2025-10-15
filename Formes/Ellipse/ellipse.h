@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "structure.h"
 
-Ellipse ellipse();
+Ellipse* create_ellipse(void);
+void free_ellipse(Ellipse* ellipse);
 
 #endif

@@ -2,35 +2,61 @@
 #include <stdlib.h>
 #include "ligne.h"
 
-Ligne ligne()
-{
-    Ligne l;
-    int placement;
-    printf("tu as choisi la ligne\n");
-    printf("veux tu placer la ligne sur le repere ? (1 pour oui, 0 pour non)");
-    scanf("%d", &placement);
+Ligne *create_line() {
+    Ligne* ligne = malloc(sizeof(Ligne));
+    int placement_ligne;
     
-    if (placement == 1)
-    {
-        printf ("choisissons ses coordonnés\n");
-        printf ("quel coordonné veux tu pour ton x au premier point ?\n");
-        scanf ("%d", &l.x1);
-        
-        printf ("quel coordonné veux tu pour ton y au premier point?\n");
-        scanf ("%d", &l.y1);
-
-        printf("quel coordonné veux tu pour ton x au deuxieme point ?\n");
-        scanf("%d",&l.x2);
-
-        printf("quel coordonné veux tu pour ton y au deuxieme point ?\n");
-        scanf("%d",&l.y2);
-
-        printf("donc ton premier point de la ligne ces ces coordonné :\n x = %d\n",l.x1);
-        printf(" y = %d\n",l.y1);
-        printf("et le deuxieme point de la ligne a ces coordonné ;\n x = %d\n",l.x2);
-        printf(" y = %d\n",l.y2);
-        
+    printf("\n╔════════════════════════════════════╗\n");
+    printf("║      ✨  CRÉATION DE LIGNE  ✨     ║\n");
+    printf("╚════════════════════════════════════╝\n\n");
     
+    printf("📍 Veux-tu placer ta ligne sur le repère ?\n");
+    printf("   [1] Oui, je veux choisir les coordonnées\n");
+    printf("   [0] Non, laisser à l'origine (0, 0)\n");
+    printf("→ Ton choix : ");
+    scanf("%d", &placement_ligne);
+    
+    if (placement_ligne == 1) {
+        printf("\n┌─────────────────────────────────┐\n");
+        printf("│    📐 Configuration de la ligne │\n");
+        printf("└─────────────────────────────────┘\n\n");
+        
+        printf("📍 Point de départ (P1) :\n");
+        printf("   • Coordonnée X1 : ");
+        scanf("%d", &ligne->x1);
+        
+        printf("   • Coordonnée Y1 : ");
+        scanf("%d", &ligne->y1);
+        
+        printf("\n📍 Point d'arrivée (P2) :\n");
+        printf("   • Coordonnée X2 : ");
+        scanf("%d", &ligne->x2);
+        
+        printf("   • Coordonnée Y2 : ");
+        scanf("%d", &ligne->y2);
+        
+        printf("\n╔════════════════════════════════════╗\n");
+        printf("║         ✅ LIGNE CRÉÉE !           ║\n");
+        printf("╠════════════════════════════════════╣\n");
+        printf("║  P1 (départ)  :  (%d, %d)%-*s║\n", 
+               ligne->x1, ligne->y1, 
+               12 - (ligne->x1 >= 10 ? 1 : 0) - (ligne->y1 >= 10 ? 1 : 0), "");
+        printf("║  P2 (arrivée) :  (%d, %d)%-*s║\n", 
+               ligne->x2, ligne->y2, 
+               12 - (ligne->x2 >= 10 ? 1 : 0) - (ligne->y2 >= 10 ? 1 : 0), "");
+        printf("╚════════════════════════════════════╝\n\n");
+    } else {
+        ligne->x1 = 0;
+        ligne->y1 = 0;
+        ligne->x2 = 0;
+        ligne->y2 = 0;
+        
+        printf("\n✅ Ligne créée de (0, 0) à (0, 0).\n\n");
     }
-    return l;
+    
+    return ligne;
+}
+
+void free_line(Ligne* ligne) {
+    free(ligne);
 }

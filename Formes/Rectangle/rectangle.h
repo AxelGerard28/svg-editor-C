@@ -5,6 +5,6 @@
 #include <stdlib.h>
 #include "structure.h"
 
-Rectangle rectangle();
-
+Rectangle* create_rectangle(void);
+void free_rectangle(Rectangle* Rectangle);
 #endif

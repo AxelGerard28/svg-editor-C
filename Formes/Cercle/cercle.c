@@ -4,31 +4,58 @@
 
 #include "structure.h"
 
-Cercle cercle()
-{
-    Cercle c;
-    int placement;
-    printf("tu as choisi le cercle\n");
-    printf("veux tu placer le cercle sur le repere ? (1 pour oui, 0 pour non)");
-    scanf("%d", &placement);
-    
-    if (placement == 1)
-    {
-        printf ("choisissons ses coordonnés\n");
-        printf ("quel coordonné veux tu pour ton x ?\n");
-        scanf ("%d", &c.x);
-        
-        printf ("quel coordonné veux tu pour ton y ?\n");
-        scanf ("%d", &c.y);
 
-        printf("quel rayon veux tu ?\n");
-        scanf("%d",&c.rayon);
-
-        printf("donc ton cercle est en\n x = %d\n",c.x);
-        printf(" y = %d\n",c.y);
-        printf("et a un rayon r = %d\n",c.rayon);
-        
+Cercle *create_circle() {
+    Cercle* cercle = malloc(sizeof(Cercle));
+    int placement_cercle;
     
+    printf("\n╔════════════════════════════════════╗\n");
+    printf("║      ✨  CRÉATION DE CERCLE  ✨    ║\n");
+    printf("╚════════════════════════════════════╝\n\n");
+    
+    printf("📍 Veux-tu placer ton cercle sur le repère ?\n");
+    printf("   [1] Oui, je veux choisir les coordonnées\n");
+    printf("   [0] Non, laisser à l'origine (0, 0)\n");
+    printf("→ Ton choix : ");
+    scanf("%d", &placement_cercle);
+    
+    if (placement_cercle == 1) {
+        printf("\n┌─────────────────────────────────┐\n");
+        printf("│   📐 Configuration du cercle    │\n");
+        printf("└─────────────────────────────────┘\n\n");
+        
+        printf("📍 Centre du cercle :\n");
+        printf("   • Coordonnée X : ");
+        scanf("%d", &cercle->x);
+        
+        printf("   • Coordonnée Y : ");
+        scanf("%d", &cercle->y);
+        
+        printf("\n📏 Dimension du cercle :\n");
+        printf("   • Rayon : ");
+        scanf("%d", &cercle->rayon);
+        
+        printf("\n╔════════════════════════════════════╗\n");
+        printf("║        ✅ CERCLE CRÉÉ !            ║\n");
+        printf("╠════════════════════════════════════╣\n");
+        printf("║  Centre : (%d, %d)%-*s║\n", 
+               cercle->x, cercle->y, 
+               19 - (cercle->x >= 10 ? 1 : 0) - (cercle->y >= 10 ? 1 : 0), "");
+        printf("║  Rayon  :  %d%-*s║\n", 
+               cercle->rayon, 
+               23 - (cercle->rayon >= 10 ? 1 : 0), "");
+        printf("╚════════════════════════════════════╝\n\n");
+    } else {
+        cercle->x = 0;
+        cercle->y = 0;
+        cercle->rayon = 0;
+        
+        printf("\n✅ Cercle créé à l'origine (0, 0) avec rayon nul.\n\n");
     }
-    return c;
+    
+    return cercle;
+}
+
+void free_circle(Cercle* cercle) {
+    free(cercle);
 }
