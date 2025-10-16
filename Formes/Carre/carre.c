@@ -3,7 +3,7 @@
 
 #include "carre.h"
 #include "structure.h"
-
+  
 
 Carre *create_square() {
     Carre* carre = malloc(sizeof(Carre));

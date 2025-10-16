@@ -4,6 +4,9 @@
         "stdio.h": "c",
         "formes.h": "c",
         "cercle.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "rectangle.h": "c",
+        "groupe.h": "c",
+        "carre.h": "c"
     }
 }

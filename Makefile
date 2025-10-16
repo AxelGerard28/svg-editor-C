@@ -13,7 +13,8 @@ SRC = mainprojet.c \
 	Formes/Polygone/polygone.c \
 	Formes/Trajectoire/trajectoire.c \
 	Formes/Groupe/groupe.c \
-	Formes/liste.c
+	Formes/liste.c \
+	Formes/Create/create.c
 
 OBJ = $(SRC:.c=.o)
 
