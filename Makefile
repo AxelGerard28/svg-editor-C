@@ -4,17 +4,9 @@ CFLAGS = -std=c99 -Wall -Wextra -Werror -IFormes
 
 # Fichiers sources et objets
 SRC = mainprojet.c \
-	Formes/Cercle/cercle.c \
-	Formes/Rectangle/rectangle.c \
-	Formes/Carre/carre.c \
-	Formes/Ellipse/ellipse.c \
-	Formes/Ligne/ligne.c \
-	Formes/Enchlignes/enchlignes.c \
-	Formes/Polygone/polygone.c \
-	Formes/Trajectoire/trajectoire.c \
-	Formes/Groupe/groupe.c \
-	Formes/liste.c \
-	Formes/Create/create.c
+	Formes/Liste/liste.c \
+	Formes/Create/create.c \
+	Formes/Shapes/shapes.c
 
 OBJ = $(SRC:.c=.o)
 

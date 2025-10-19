@@ -8,7 +8,7 @@ Liste* create_liste() {
     liste->count = 0;
     return liste;
 }
-
+//ajouter une forme
 void add_shape(Liste *liste, Shape *shape) {
     Node *new_node = malloc(sizeof(Node));
     new_node->shape = shape;
@@ -25,7 +25,7 @@ void add_shape(Liste *liste, Shape *shape) {
     }
     liste->count++;
 }
-
+//lister mes formes
 void display_all_shapes(Liste *liste) {
     if (liste->head == NULL) {
         printf("\nAucune forme créée pour le moment.\n\n");

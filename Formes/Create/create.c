@@ -1,13 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "../Cercle/cercle.h"
-#include "../Rectangle/rectangle.h"
-#include "../Carre/carre.h"
-#include "../Ellipse/ellipse.h" 
-#include "../Ligne/ligne.h"
-#include "../liste.h"
+#include "../Liste/liste.h"
 #include "../structure.h"
+#include "../Shapes/shapes.h"
 
 #define RED "\033[31m"
 #define RESET "\033[0m"
@@ -44,10 +40,31 @@ void menu_formes()
     printf("Ton choix : ");
 }
 
-Shape* creer_forme() {
+int getint(int min, int max){
     int choix;
+    int resultat;
+
+    while(1){
+        resultat = scanf("%d", &choix);
+
+        if (resultat != 1) {
+            while (getchar() != '\n');
+            printf("Erreur : veuillez entrer un nombre entier.\n");
+            printf("Nouvelle tentative : ");
+            continue;
+        }
+        if (choix < min || choix > max) {
+            printf("Erreur : la valeur doit être entre %d et %d.\n", min, max);
+            printf("Nouvelle tentative : ");
+            continue;
+        }
+        return choix;
+    }
+}
+
+Shape* creer_forme() {
     menu_formes();
-    scanf("%d", &choix);
+    int choix = getint(0, 5);
     
     Shape *shape = malloc(sizeof(Shape));
     
@@ -100,9 +117,8 @@ void modifier_forme(Liste *liste) {
     
     display_all_shapes(liste);
     
-    int index;
     printf("Quel numéro de forme veux-tu modifier ? ");
-    scanf("%d", &index);
+    int index = getint(1, liste->count);
     
     Shape *shape = get_shape_at(liste, index);
     if (shape == NULL) {
@@ -116,57 +132,57 @@ void modifier_forme(Liste *liste) {
         case CARRE:
             printf("Nouvelles coordonnées pour le carré:\n");
             printf("x : ");
-            scanf("%d", &shape->formes.carre->x);
+            shape->formes.carre->x = getint(0, 200);
             printf("y : ");
-            scanf("%d", &shape->formes.carre->y);
+            shape->formes.carre->y = getint(0, 200);
             printf("longueur : ");
-            scanf("%d", &shape->formes.carre->longueur);
+            shape->formes.carre->longueur = getint(0, 200);
             break;
             
         case RECTANGLE:
             printf("Nouvelles coordonnées pour le rectangle:\n");
             printf("x : ");
-            scanf("%d", &shape->formes.rectangle->x);
+            shape->formes.rectangle->x = getint(0, 200);
             printf("y : ");
-            scanf("%d", &shape->formes.rectangle->y);
+            shape->formes.rectangle->y = getint(0, 200);
             printf("longueur : ");
-            scanf("%d", &shape->formes.rectangle->longueur);
+            shape->formes.rectangle->longueur = getint(0, 200);
             printf("largeur : ");
-            scanf("%d", &shape->formes.rectangle->largeur);
+            shape->formes.rectangle->largeur = getint(0, 200);
             break;
             
         case CERCLE:
             printf("Nouvelles coordonnées pour le cercle:\n");
             printf("x : ");
-            scanf("%d", &shape->formes.cercle->x);
+            shape->formes.cercle->x = getint(0, 200);
             printf("y : ");
-            scanf("%d", &shape->formes.cercle->y);
+            shape->formes.cercle->y = getint(0, 200);
             printf("rayon : ");
-            scanf("%d", &shape->formes.cercle->rayon);
+            shape->formes.cercle->rayon = getint(0, 200);
             break;
             
         case ELLIPSE:
             printf("Nouvelles coordonnées pour l'ellipse:\n");
             printf("x : ");
-            scanf("%d", &shape->formes.ellipse->x);
+            shape->formes.ellipse->x = getint(0, 200);
             printf("y : ");
-            scanf("%d", &shape->formes.ellipse->y);
+            shape->formes.ellipse->y = getint(0, 200);
             printf("rayonx : ");
-            scanf("%d", &shape->formes.ellipse->rayonx);
+            shape->formes.ellipse->rayonx = getint(0, 200);
             printf("rayony : ");
-            scanf("%d", &shape->formes.ellipse->rayony);
+            shape->formes.ellipse->rayony = getint(0, 200);
             break;
             
         case LIGNE:
             printf("Nouvelles coordonnées pour la ligne:\n");
             printf("x1 : ");
-            scanf("%d", &shape->formes.ligne->x1);
+            shape->formes.ligne->x1 = getint(0, 200);
             printf("y1 : ");
-            scanf("%d", &shape->formes.ligne->y1);
+            shape->formes.ligne->y1 = getint(0, 200);
             printf("x2 : ");
-            scanf("%d", &shape->formes.ligne->x2);
+            shape->formes.ligne->x2 = getint(0, 200);
             printf("y2 : ");
-            scanf("%d", &shape->formes.ligne->y2);
+            shape->formes.ligne->y2 = getint(0, 200);
             break;
     }
     
@@ -181,9 +197,8 @@ void supprimer_forme(Liste *liste) {
     
     display_all_shapes(liste);
     
-    int index;
     printf("Quel numéro de forme veux-tu supprimer ? ");
-    scanf("%d", &index);
+    int index = getint(1, liste->count);
     
     remove_shape_at(liste, index);
 }

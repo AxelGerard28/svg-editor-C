@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Formes/structure.h"
-#include "Formes/liste.h"
+#include "Formes/Liste/liste.h"
 #include "Formes/Create/create.h"
 #define RED "\033[31m"
 #define RESET "\033[0m"
@@ -11,7 +11,6 @@
 int main(void)
 {
     Liste *liste = create_liste();
-    int choix;
     
     printf(BLUE "\n╔════════════════════════════════════════╗\n" RESET);
     printf(BLUE "║    Bienvenue dans l'éditeur SVG !     ║\n" RESET);
@@ -19,7 +18,7 @@ int main(void)
     
     while (1) {
         menu_principal();
-        scanf("%d", &choix);
+        int choix = getint(0, 4);
         
         switch (choix) {
             case 0:
