@@ -76,26 +76,46 @@ Shape* creer_forme() {
         case 1:
             shape->typesformes = CERCLE;
             shape->formes.cercle = create_circle();
+            if(shape->formes.cercle == NULL){
+                free(shape);
+                return NULL;
+            }
             break;
             
         case 2:
             shape->typesformes = ELLIPSE;
             shape->formes.ellipse = create_ellipse();
+            if(shape->formes.ellipse == NULL){
+                free(shape);
+                return NULL;
+            }
             break;
             
         case 3:
             shape->typesformes = CARRE;
             shape->formes.carre = create_square();
+            if(shape->formes.carre == NULL){
+                free(shape);
+                return NULL;
+            }
             break;
             
         case 4:
             shape->typesformes = RECTANGLE;
             shape->formes.rectangle = create_rectangle();
+            if(shape->formes.rectangle == NULL){
+                free(shape);
+                return NULL;
+            }
             break;
             
         case 5:
             shape->typesformes = LIGNE;
             shape->formes.ligne = create_line();
+            if(shape->formes.ligne == NULL){
+                free(shape);
+                return NULL;
+            }
             break;
             
         default:

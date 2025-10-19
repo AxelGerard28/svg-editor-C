@@ -40,11 +40,9 @@ Cercle *create_circle() {
         printf("| Rayon  : %d\n", cercle->rayon);
         printf("+====================================+\n\n");
     } else {
-        cercle->x = 0;
-        cercle->y = 0;
-        cercle->rayon = 0;
-        
-        printf("\nCercle cree a l'origine (0, 0).\n\n");
+        free(cercle);
+        printf("\nCreation annulee. Retour au menu.\n\n ");
+        return NULL;
     }
     
     return cercle;
@@ -94,12 +92,9 @@ Ellipse *create_ellipse() {
         printf("| Rayon Y  : %d\n", ellipse->rayony);
         printf("+====================================+\n\n");
     } else {
-        ellipse->x = 0;
-        ellipse->y = 0;
-        ellipse->rayonx = 0;
-        ellipse->rayony = 0;
-        
-        printf("\nEllipse creee a l'origine (0, 0).\n\n");
+        free(ellipse);
+        printf("\nCreation annulee. Retour au menu.\n\n");
+        return NULL;
     }
     
     return ellipse;
@@ -145,11 +140,9 @@ Carre *create_square() {
         printf("| Cote     : %d\n", carre->longueur);
         printf("+====================================+\n\n");
     } else {
-        carre->x = 0;
-        carre->y = 0;
-        carre->longueur = 0;
-        
-        printf("\nCarre cree a l'origine (0, 0).\n\n");
+        free(carre);
+        printf("\nCreation annulee. Retour au menu.\n\n");
+        return NULL;
     }
     
     return carre;
@@ -163,7 +156,6 @@ void free_square(Carre* carre) {
 
 Rectangle *create_rectangle() {
     Rectangle* rectangle = malloc(sizeof(Rectangle));
-    int placement_rectangle;
     
     printf("\n+====================================+\n");
     printf("|      CREATION DE RECTANGLE         |\n");
@@ -200,12 +192,9 @@ Rectangle *create_rectangle() {
         printf("| Largeur  : %d\n", rectangle->largeur);
         printf("+====================================+\n\n");
     } else {
-        rectangle->x = 0;
-        rectangle->y = 0;
-        rectangle->longueur = 0;
-        rectangle->largeur = 0;
-        
-        printf("\nRectangle cree a l'origine (0, 0).\n\n");
+        free(rectangle);
+        printf("\nCreation annulee. Retour au menu.\n\n");
+        return NULL;
     }
     
     return rectangle;
@@ -219,7 +208,6 @@ void free_rectangle(Rectangle* rectangle) {
 
 Ligne *create_line() {
     Ligne* ligne = malloc(sizeof(Ligne));
-    int placement_ligne;
     
     printf("\n+====================================+\n");
     printf("|        CREATION DE LIGNE           |\n");
@@ -255,12 +243,9 @@ Ligne *create_line() {
         printf("| P2 (arrivee) : (%d, %d)\n", ligne->x2, ligne->y2);
         printf("+====================================+\n\n");
     } else {
-        ligne->x1 = 0;
-        ligne->y1 = 0;
-        ligne->x2 = 0;
-        ligne->y2 = 0;
-        
-        printf("\nLigne creee de (0, 0) a (0, 0).\n\n");
+        free(ligne);
+        printf("\nCreation annulee. Retour au menu.\n\n");
+        return NULL;
     }
     
     return ligne;
