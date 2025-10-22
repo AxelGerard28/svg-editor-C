@@ -71,6 +71,3 @@ int main(void)
     
     return 0;
 }
-
-
-//yokoso watashi no soul soceity
