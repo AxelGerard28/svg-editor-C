@@ -12,6 +12,12 @@
 #define BLUE "\033[34m"
 #define CYAN "\033[36m"
 
+/**
+ * @brief Affiche le menu principal de l'éditeur SVG
+ * 
+ * Présente les différentes options disponibles avec une mise en forme
+ * colorée : création, affichage, modification, suppression de formes.
+ */
 void menu_principal() 
 {
     printf("\n");
@@ -21,13 +27,18 @@ void menu_principal()
     printf(GREEN " 1" RESET " - Créer une forme\n");
     printf(GREEN " 2" RESET " - Afficher toutes les formes\n");
     printf(GREEN " 3" RESET " - Modifier une forme\n");
-    //printf(GREEN " 4" RESET " - Modifier la couleur d'une forme\n");
-    printf(GREEN " 5" RESET " - Supprimer une forme\n");
+    printf(GREEN " 4" RESET " - Supprimer une forme\n");
     printf(RED " 0" RESET " - Quitter\n");
     printf(CYAN "========================================\n" RESET);
     printf("Ton choix : ");
 }
 
+/**
+ * @brief Affiche le menu de sélection des formes
+ * 
+ * Présente tous les types de formes disponibles à la création :
+ * cercle, ellipse, carré, rectangle, ligne et polygone.
+ */
 void menu_formes()
 {
     printf("\n");
@@ -37,10 +48,24 @@ void menu_formes()
     printf(GREEN " 3" RESET " - Carré\n");
     printf(GREEN " 4" RESET " - Rectangle\n");
     printf(GREEN " 5" RESET " - Ligne\n");
+    printf(GREEN " 6" RESET " - Polygone\n");
     printf(RED " 0" RESET " - Retour\n");
     printf("Ton choix : ");
 }
 
+/**
+ * @brief Lit un entier dans un intervalle donné avec validation
+ * 
+ * Demande à l'utilisateur de saisir un entier et vérifie qu'il est bien
+ * dans l'intervalle [min, max]. Redemande en cas d'erreur de saisie.
+ * 
+ * @param min Valeur minimale acceptée
+ * @param max Valeur maximale acceptée
+ * 
+ * @return L'entier saisi par l'utilisateur
+ * 
+ * @note Gère automatiquement les erreurs de saisie (caractères invalides)
+ */
 int getint(int min, int max){
     int choix;
     int resultat;
@@ -63,9 +88,22 @@ int getint(int min, int max){
     }
 }
 
+/**
+ * @brief Crée une nouvelle forme de manière interactive
+ * 
+ * Affiche le menu des formes, demande à l'utilisateur de choisir un type,
+ * puis appelle la fonction de création appropriée. Gère l'allocation
+ * mémoire et les erreurs éventuelles.
+ * 
+ * @return Pointeur vers la forme créée, NULL en cas d'annulation ou d'erreur
+ * 
+ * @warning La forme retournée doit être libérée avec free_shape()
+ * 
+ * @note Si la création échoue, la mémoire est automatiquement libérée
+ */
 Shape* creer_forme() {
     menu_formes();
-    int choix = getint(0, 5);
+    int choix = getint(0, 6);
     
     Shape *shape = malloc(sizeof(Shape));
     
@@ -118,6 +156,15 @@ Shape* creer_forme() {
                 return NULL;
             }
             break;
+
+        case 6:
+            shape->typesformes = POLYGONE;
+            shape->formes.polygone = create_polygone();
+            if(shape->formes.polygone == NULL){
+                free(shape);
+                return NULL;
+            }
+            break;
             
         default:
             printf("Choix invalide!\n");
@@ -129,6 +176,20 @@ Shape* creer_forme() {
     return shape;
 }
 
+/**
+ * @brief Dialogue interactif pour choisir les couleurs d'une forme
+ * 
+ * Demande à l'utilisateur de saisir les composantes RGB pour la couleur
+ * de fond et de contour, ainsi que l'épaisseur du contour. Les couleurs
+ * sont formatées en notation CSS rgb(r,g,b).
+ * 
+ * @param couleur_fond Buffer pour stocker la couleur de fond (format rgb(r,g,b))
+ * @param couleur_contour Buffer pour stocker la couleur de contour
+ * @param epaisseur Pointeur vers l'épaisseur du contour (1-10)
+ * 
+ * @warning Les buffers couleur_fond et couleur_contour doivent être suffisamment
+ *          grands (minimum 20 caractères recommandés)
+ */
 void choose_color(char *couleur_fond, char *couleur_contour, int *epaisseur) {
     printf("\n+====================================+\n");
     printf("|        CHOIX DES COULEURS          |\n");
@@ -168,7 +229,19 @@ void choose_color(char *couleur_fond, char *couleur_contour, int *epaisseur) {
     printf("   Contour : %s (epaisseur %d)\n\n", couleur_contour, *epaisseur);
 }
 
-
+/**
+ * @brief Modifie une forme existante de manière interactive
+ * 
+ * Affiche la liste des formes, demande à l'utilisateur d'en sélectionner une,
+ * puis propose de modifier sa géométrie, ses couleurs, ou les deux.
+ * Gère tous les types de formes avec leurs paramètres spécifiques.
+ * 
+ * @param liste Pointeur vers la liste contenant les formes
+ * 
+ * @warning liste ne doit pas être NULL
+ * 
+ * @note Pour les polygones, permet de modifier tous les points ou un seul
+ */
 void modifier_forme(Liste *liste) {
     if (liste->count == 0) {
         printf("\nAucune forme à modifier.\n");
@@ -275,6 +348,39 @@ void modifier_forme(Liste *liste) {
                 printf("  Nouvelle coordonnée Y2 : ");
                 shape->formes.ligne->y2 = getint(0, 200);
                 break;
+
+            case POLYGONE:
+            printf("\n--- Modification du POLYGONE ---\n");
+            printf("Que veux-tu modifier ?\n");
+            printf("  [1] Tous les points\n");
+            printf("  [2] Un seul point\n");
+            printf("-> Ton choix : ");
+            int choix_poly = getint(1, 2);
+            
+            if (choix_poly == 1) {
+                // Modifier tous les points
+                for (int i = 0; i < shape->formes.polygone->nb_points; i++) {
+                    printf("\nPoint %d :\n", i + 1);
+                    printf("  Nouvelle coordonnée X : ");
+                    shape->formes.polygone->points[i].x = getint(0, 200);
+                    
+                    printf("  Nouvelle coordonnée Y : ");
+                    shape->formes.polygone->points[i].y = getint(0, 200);
+                }
+            } else {
+                // Modifier un seul point
+                printf("Quel point veux-tu modifier (1-%d) ? ", 
+                       shape->formes.polygone->nb_points);
+                int num_point = getint(1, shape->formes.polygone->nb_points);
+                
+                printf("\nPoint %d :\n", num_point);
+                printf("  Nouvelle coordonnée X : ");
+                shape->formes.polygone->points[num_point - 1].x = getint(0, 200);
+                
+                printf("  Nouvelle coordonnée Y : ");
+                shape->formes.polygone->points[num_point - 1].y = getint(0, 200);
+            }
+            break;
                 
             default:
                 printf("Type de forme non supporté.\n");
@@ -291,6 +397,18 @@ void modifier_forme(Liste *liste) {
     }
 }
 
+/**
+ * @brief Supprime une forme de manière interactive
+ * 
+ * Affiche la liste des formes, demande à l'utilisateur d'en sélectionner une,
+ * puis la supprime de la liste en libérant sa mémoire.
+ * 
+ * @param liste Pointeur vers la liste contenant les formes
+ * 
+ * @warning liste ne doit pas être NULL
+ * 
+ * @note Affiche un message si la liste est vide
+ */
 void supprimer_forme(Liste *liste) {
     if (liste->count == 0) {
         printf("\nAucune forme à supprimer.\n");

@@ -24,6 +24,10 @@ void free_rectangle(Rectangle* Rectangle);
 Ligne* create_line(void);
 void free_line(Ligne* ligne);
 
+//polygone
+Polygone* create_polygone(void);
+void free_polygone(Polygone *polygone);
+
 
 
 #endif

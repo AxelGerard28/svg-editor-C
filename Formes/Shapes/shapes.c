@@ -4,8 +4,13 @@
 #include "structure.h"
 #include "../Create/create.h"
 
-//cercle
-
+/**
+ * @brief Crée un nouveau cercle avec interaction utilisateur
+ * 
+ * @return Pointeur vers le cercle créé, ou NULL si annulation
+ * 
+ * @note Allocation dynamique avec malloc()
+ */
 Cercle *create_circle() {
     Cercle* cercle = malloc(sizeof(Cercle));
     
@@ -47,13 +52,27 @@ Cercle *create_circle() {
     
     return cercle;
 }
-
+/**
+ * @brief Libère la mémoire allouée pour un cercle
+ * 
+ * @param cercle Pointeur vers le cercle à libérer
+ * 
+ * @return void
+ * 
+ * @warning cercle ne doit pas être NULL
+ */
 void free_circle(Cercle* cercle) {
     free(cercle);
 }
 
 //ellipse
-
+/**
+ * @brief Crée une nouvelle ellipse avec interaction utilisateur
+ * 
+ * @return Pointeur vers l'ellipse créée, ou NULL si annulation
+ * 
+ * @note Allocation dynamique avec malloc()
+ */
 Ellipse *create_ellipse() {
     Ellipse* ellipse = malloc(sizeof(Ellipse));
     
@@ -99,13 +118,27 @@ Ellipse *create_ellipse() {
     
     return ellipse;
 }
-
+/**
+ * @brief Libère la mémoire allouée pour une ellipse
+ * 
+ * @param ellipse Pointeur vers l'ellipse à libérer
+ * 
+ * @return void
+ * 
+ * @warning ellipse ne doit pas être NULL
+ */
 void free_ellipse(Ellipse* ellipse){
     free(ellipse);
 }
 
-//carre
 
+/**
+ * @brief Crée un nouveau carre avec interaction utilisateur
+ * 
+ * @return Pointeur vers le carre créé, ou NULL si annulation
+ * 
+ * @note Allocation dynamique avec malloc()
+ */
 Carre *create_square() {
     Carre* carre = malloc(sizeof(Carre));
     
@@ -147,13 +180,27 @@ Carre *create_square() {
     
     return carre;
 }
-
+/**
+ * @brief Libère la mémoire allouée pour un carre
+ * 
+ * @param carre Pointeur vers le carre à libérer
+ * 
+ * @return void
+ * 
+ * @warning carre ne doit pas être NULL
+ */
 void free_square(Carre* carre) {
     free(carre);
 }
 
-//rectangle
 
+/**
+ * @brief Crée un nouveau recatgnle avec interaction utilisateur
+ * 
+ * @return Pointeur vers le rectangle créé, ou NULL si annulation
+ * 
+ * @note Allocation dynamique avec malloc()
+ */
 Rectangle *create_rectangle() {
     Rectangle* rectangle = malloc(sizeof(Rectangle));
     
@@ -199,13 +246,27 @@ Rectangle *create_rectangle() {
     
     return rectangle;
 }
-
+/**
+ * @brief Libère la mémoire allouée pour un rectangle
+ * 
+ * @param rectangle Pointeur vers le rectangle à libérer
+ * 
+ * @return void
+ * 
+ * @warning rectangle ne doit pas être NULL
+ */
 void free_rectangle(Rectangle* rectangle) {
     free(rectangle);
 }
 
 //ligne
-
+/**
+ * @brief Crée une nouvelle ligne avec interaction utilisateur
+ * 
+ * @return Pointeur vers la ligne créée, ou NULL si annulation
+ * 
+ * @note Allocation dynamique avec malloc()
+ */
 Ligne *create_line() {
     Ligne* ligne = malloc(sizeof(Ligne));
     
@@ -250,7 +311,88 @@ Ligne *create_line() {
     
     return ligne;
 }
-
+/**
+ * @brief Libère la mémoire allouée pour une ligne
+ * 
+ * @param ligne Pointeur vers la ligne à libérer
+ * 
+ * @return void
+ * 
+ * @warning ligne ne doit pas être NULL
+ */
 void free_line(Ligne* ligne) {
     free(ligne);
+}
+
+
+/**
+ * @brief Crée un nouveau polygone avec interaction utilisateur
+ * 
+ * @return Pointeur vers le polygone créé, ou NULL si annulation
+ * 
+ * @note Allocation dynamique avec malloc()
+ */
+Polygone *create_polygone(void) {
+    Polygone* polygone = malloc(sizeof(Polygone));
+    
+    printf("\n+====================================+\n");
+    printf("|      CREATION DE POLYGONE          |\n");
+    printf("+====================================+\n\n");
+    
+    printf("Veux-tu creer un polygone ?\n");
+    printf("  [1] Oui\n");
+    printf("  [0] Non, annuler\n");
+    printf("-> Ton choix : ");
+    int placement = getint(0, 1);
+    
+    if (placement == 0) {
+        free(polygone);
+        printf("\n❌ Creation annulee. Retour au menu.\n\n");
+        return NULL;
+    }
+    
+    printf("\n--- Configuration du polygone ---\n\n");
+    printf("Combien de sommets pour ton polygone (3-20) ? ");
+    polygone->nb_points = getint(3, 20);
+    
+    polygone->points = malloc(sizeof(Point) * polygone->nb_points);
+    
+    for (int i = 0; i < polygone->nb_points; i++) {
+        printf("\nPoint %d :\n", i + 1);
+        printf("  Coordonnee X : ");
+        polygone->points[i].x = getint(0, 200);
+        
+        printf("  Coordonnee Y : ");
+        polygone->points[i].y = getint(0, 200);
+    }
+
+    printf("\n+====================================+\n");
+    printf("|        POLYGONE CREE !             |\n");
+    printf("+------------------------------------+\n");
+    printf("| Nombre de sommets : %d\n", polygone->nb_points);
+    printf("| Points :\n");
+    for (int i = 0; i < polygone->nb_points; i++) {
+        printf("|   P%d: (%d, %d)\n", i + 1, 
+               polygone->points[i].x, 
+               polygone->points[i].y);
+    }
+    printf("+====================================+\n\n");
+    
+    return polygone;
+}
+
+/**
+ * @brief Libère la mémoire allouée pour un polygone
+ * 
+ * @param polygone Pointeur vers le polygone à libérer
+ * 
+ * @return void
+ * 
+ * @warning polygone ne doit pas être NULL
+ */
+void free_polygone(Polygone* polygone) {
+    if (polygone != NULL) {
+        free(polygone->points);
+        free(polygone);
+    }
 }

@@ -8,6 +8,19 @@
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"
 
+
+/**
+ * @brief Point d'entrée principal du programme
+ * 
+ * Initialise la liste de formes et lance la boucle principale du menu.
+ * L'utilisateur peut créer, afficher, modifier et supprimer des formes
+ * de manière interactive. Le programme se termine proprement en libérant
+ * toute la mémoire allouée.
+ * 
+ * @return 0 en cas de succès
+ * 
+ * @note La boucle continue jusqu'à ce que l'utilisateur choisisse de quitter (option 0)
+ */
 int main(void)
 {
     Liste *liste = create_liste();
@@ -22,7 +35,7 @@ int main(void)
         
         switch (choix) {
             case 0:
-                printf(YELLOW "\nAu revoir\n" RESET);
+                printf(YELLOW "\nAu revoir !\n" RESET);
                 free_liste(liste);
                 return 0;
                 
