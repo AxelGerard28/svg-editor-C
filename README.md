@@ -3,13 +3,12 @@
 **projet svg** est un programme en langage *C* qui permait de creer, lister, modifier et supprimer des formes
 
 **Fonctionnalités actuellement disponibles :**
-- Création, modification et suppression de **cercles**, **ellipses**, **carrée**, **rectangles**, et **lignes**
+- Création, modification et suppression de **cercles**, **ellipses**, **carrée**, **rectangles**, **lignes** et **polygones**
 - Gestion simple de la structure interne du document
 - Utilisation simplifiée pour l'utilisateur
 
 **Fonctionnalités en cours de développement :**
 - **polylignes**
-- **polygones**
 - **groupes**
 - **chemins**
 
