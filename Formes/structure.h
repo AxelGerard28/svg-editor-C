@@ -60,11 +60,23 @@ typedef union
     Ellipse *ellipse;
 } Formes;
 
+typedef struct
+{
+    char couleur_fond[30];
+    char couleur_contour[30];
+    int epaisseur_contour;
+}Color;
+
+
 typedef struct 
 {
     TypesFormes typesformes;
     Formes formes;
+    Color color;
 }Shape;
+
+
+
 
 
 #endif

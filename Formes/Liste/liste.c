@@ -26,6 +26,7 @@ void add_shape(Liste *liste, Shape *shape) {
     liste->count++;
 }
 //lister mes formes
+//lister mes formes
 void display_all_shapes(Liste *liste) {
     if (liste->head == NULL) {
         printf("\nAucune forme créée pour le moment.\n\n");
@@ -46,6 +47,11 @@ void display_all_shapes(Liste *liste) {
                        current->shape->formes.carre->x,
                        current->shape->formes.carre->y,
                        current->shape->formes.carre->longueur);
+                // ← AJOUTER CES 2 LIGNES
+                printf("  🎨 Fond: %s | Contour: %s (épaisseur: %d)\n",
+                       current->shape->color.couleur_fond,
+                       current->shape->color.couleur_contour,
+                       current->shape->color.epaisseur_contour);
                 break;
                 
             case RECTANGLE:
@@ -55,6 +61,11 @@ void display_all_shapes(Liste *liste) {
                        current->shape->formes.rectangle->y,
                        current->shape->formes.rectangle->longueur,
                        current->shape->formes.rectangle->largeur);
+                // ← AJOUTER CES 2 LIGNES
+                printf("  🎨 Fond: %s | Contour: %s (épaisseur: %d)\n",
+                       current->shape->color.couleur_fond,
+                       current->shape->color.couleur_contour,
+                       current->shape->color.epaisseur_contour);
                 break;
                 
             case CERCLE:
@@ -63,6 +74,11 @@ void display_all_shapes(Liste *liste) {
                        current->shape->formes.cercle->x,
                        current->shape->formes.cercle->y,
                        current->shape->formes.cercle->rayon);
+                // ← AJOUTER CES 2 LIGNES
+                printf("  🎨 Fond: %s | Contour: %s (épaisseur: %d)\n",
+                       current->shape->color.couleur_fond,
+                       current->shape->color.couleur_contour,
+                       current->shape->color.epaisseur_contour);
                 break;
                 
             case ELLIPSE:
@@ -72,6 +88,11 @@ void display_all_shapes(Liste *liste) {
                        current->shape->formes.ellipse->y,
                        current->shape->formes.ellipse->rayonx,
                        current->shape->formes.ellipse->rayony);
+                // ← AJOUTER CES 2 LIGNES
+                printf("Fond: %s | Contour: %s (épaisseur: %d)\n",
+                       current->shape->color.couleur_fond,
+                       current->shape->color.couleur_contour,
+                       current->shape->color.epaisseur_contour);
                 break;
                 
             case LIGNE:
@@ -81,6 +102,10 @@ void display_all_shapes(Liste *liste) {
                        current->shape->formes.ligne->y1,
                        current->shape->formes.ligne->x2,
                        current->shape->formes.ligne->y2);
+                // ← AJOUTER CETTE LIGNE (pour les lignes, pas de fond)
+                printf("Couleur: %s (épaisseur: %d)\n",
+                       current->shape->color.couleur_contour,
+                       current->shape->color.epaisseur_contour);
                 break;
         }
         

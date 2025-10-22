@@ -21,13 +21,14 @@ void menu_principal()
     printf(GREEN " 1" RESET " - Créer une forme\n");
     printf(GREEN " 2" RESET " - Afficher toutes les formes\n");
     printf(GREEN " 3" RESET " - Modifier une forme\n");
-    printf(GREEN " 4" RESET " - Supprimer une forme\n");
+    //printf(GREEN " 4" RESET " - Modifier la couleur d'une forme\n");
+    printf(GREEN " 5" RESET " - Supprimer une forme\n");
     printf(RED " 0" RESET " - Quitter\n");
     printf(CYAN "========================================\n" RESET);
     printf("Ton choix : ");
 }
 
-void menu_formes() 
+void menu_formes()
 {
     printf("\n");
     printf(RED "Sélectionne une forme :\n" RESET);
@@ -128,6 +129,45 @@ Shape* creer_forme() {
     return shape;
 }
 
+void choose_color(char *couleur_fond, char *couleur_contour, int *epaisseur) {
+    printf("\n+====================================+\n");
+    printf("|        CHOIX DES COULEURS          |\n");
+    printf("+====================================+\n\n");
+    
+    // Couleur de fond
+    printf("Couleur de fond (RGB) :\n");
+    printf("  Rouge (0-255) : ");
+    int r_fond = getint(0, 255);
+    
+    printf("  Vert (0-255) : ");
+    int g_fond = getint(0, 255);
+    
+    printf("  Bleu (0-255) : ");
+    int b_fond = getint(0, 255);
+    
+    // Couleur de contour
+    printf("\nCouleur de contour (RGB) :\n");
+    printf("  Rouge (0-255) : ");
+    int r_contour = getint(0, 255);
+    
+    printf("  Vert (0-255) : ");
+    int g_contour = getint(0, 255);
+    
+    printf("  Bleu (0-255) : ");
+    int b_contour = getint(0, 255);
+    
+    // Épaisseur
+    printf("\nEpaisseur du contour (1-10) : ");
+    *epaisseur = getint(1, 10);
+
+    sprintf(couleur_fond, "rgb(%d,%d,%d)", r_fond, g_fond, b_fond);
+    sprintf(couleur_contour, "rgb(%d,%d,%d)", r_contour, g_contour, b_contour);
+    
+    printf("\nCouleurs choisies :\n");
+    printf("   Fond    : %s\n", couleur_fond);
+    printf("   Contour : %s (epaisseur %d)\n\n", couleur_contour, *epaisseur);
+}
+
 
 void modifier_forme(Liste *liste) {
     if (liste->count == 0) {
@@ -146,67 +186,109 @@ void modifier_forme(Liste *liste) {
         return;
     }
     
-    printf("\nModification de la forme %d...\n", index);
+    // Menu de modification
+    printf("\n+====================================+\n");
+    printf("|      QUE VEUX-TU MODIFIER ?        |\n");
+    printf("+====================================+\n");
+    printf("  [1] Position et dimensions\n");
+    printf("  [2] Couleurs\n");
+    printf("  [3] Tout modifier\n");
+    printf("  [0] Annuler\n");
+    printf("-> Ton choix : ");
+    int choix_modif = getint(0, 3);
     
-    switch (shape->typesformes) {
-        case CARRE:
-            printf("Nouvelles coordonnées pour le carré:\n");
-            printf("x : ");
-            shape->formes.carre->x = getint(0, 200);
-            printf("y : ");
-            shape->formes.carre->y = getint(0, 200);
-            printf("longueur : ");
-            shape->formes.carre->longueur = getint(0, 200);
-            break;
-            
-        case RECTANGLE:
-            printf("Nouvelles coordonnées pour le rectangle:\n");
-            printf("x : ");
-            shape->formes.rectangle->x = getint(0, 200);
-            printf("y : ");
-            shape->formes.rectangle->y = getint(0, 200);
-            printf("longueur : ");
-            shape->formes.rectangle->longueur = getint(0, 200);
-            printf("largeur : ");
-            shape->formes.rectangle->largeur = getint(0, 200);
-            break;
-            
-        case CERCLE:
-            printf("Nouvelles coordonnées pour le cercle:\n");
-            printf("x : ");
-            shape->formes.cercle->x = getint(0, 200);
-            printf("y : ");
-            shape->formes.cercle->y = getint(0, 200);
-            printf("rayon : ");
-            shape->formes.cercle->rayon = getint(0, 200);
-            break;
-            
-        case ELLIPSE:
-            printf("Nouvelles coordonnées pour l'ellipse:\n");
-            printf("x : ");
-            shape->formes.ellipse->x = getint(0, 200);
-            printf("y : ");
-            shape->formes.ellipse->y = getint(0, 200);
-            printf("rayonx : ");
-            shape->formes.ellipse->rayonx = getint(0, 200);
-            printf("rayony : ");
-            shape->formes.ellipse->rayony = getint(0, 200);
-            break;
-            
-        case LIGNE:
-            printf("Nouvelles coordonnées pour la ligne:\n");
-            printf("x1 : ");
-            shape->formes.ligne->x1 = getint(0, 200);
-            printf("y1 : ");
-            shape->formes.ligne->y1 = getint(0, 200);
-            printf("x2 : ");
-            shape->formes.ligne->x2 = getint(0, 200);
-            printf("y2 : ");
-            shape->formes.ligne->y2 = getint(0, 200);
-            break;
+    if (choix_modif == 0) {
+        printf("\nModification annulée.\n");
+        return;
     }
     
-    printf(GREEN "\nForme modifiée avec succès!\n" RESET);
+    // Modifier la géométrie
+    if (choix_modif == 1 || choix_modif == 3) {
+        switch (shape->typesformes) {
+            case CARRE:
+                printf("\n--- Modification du CARRÉ ---\n");
+                printf("Nouvelle coordonnée X : ");
+                shape->formes.carre->x = getint(0, 200);
+                
+                printf("Nouvelle coordonnée Y : ");
+                shape->formes.carre->y = getint(0, 200);
+                
+                printf("Nouveau côté : ");
+                shape->formes.carre->longueur = getint(1, 200);
+                break;
+                
+            case RECTANGLE:
+                printf("\n--- Modification du RECTANGLE ---\n");
+                printf("Nouvelle coordonnée X : ");
+                shape->formes.rectangle->x = getint(0, 200);
+                
+                printf("Nouvelle coordonnée Y : ");
+                shape->formes.rectangle->y = getint(0, 200);
+                
+                printf("Nouvelle longueur : ");
+                shape->formes.rectangle->longueur = getint(1, 200);
+                
+                printf("Nouvelle largeur : ");
+                shape->formes.rectangle->largeur = getint(1, 200);
+                break;
+                
+            case CERCLE:
+                printf("\n--- Modification du CERCLE ---\n");
+                printf("Nouvelle coordonnée X : ");
+                shape->formes.cercle->x = getint(0, 200);
+                
+                printf("Nouvelle coordonnée Y : ");
+                shape->formes.cercle->y = getint(0, 200);
+                
+                printf("Nouveau rayon : ");
+                shape->formes.cercle->rayon = getint(1, 200);
+                break;
+                
+            case ELLIPSE:
+                printf("\n--- Modification de l'ELLIPSE ---\n");
+                printf("Nouvelle coordonnée X : ");
+                shape->formes.ellipse->x = getint(0, 200);
+                
+                printf("Nouvelle coordonnée Y : ");
+                shape->formes.ellipse->y = getint(0, 200);
+                
+                printf("Nouveau rayon X : ");
+                shape->formes.ellipse->rayonx = getint(1, 200);
+                
+                printf("Nouveau rayon Y : ");
+                shape->formes.ellipse->rayony = getint(1, 200);
+                break;
+                
+            case LIGNE:
+                printf("\n--- Modification de la LIGNE ---\n");
+                printf("Point de départ (P1) :\n");
+                printf("  Nouvelle coordonnée X1 : ");
+                shape->formes.ligne->x1 = getint(0, 200);
+                
+                printf("  Nouvelle coordonnée Y1 : ");
+                shape->formes.ligne->y1 = getint(0, 200);
+                
+                printf("\nPoint d'arrivée (P2) :\n");
+                printf("  Nouvelle coordonnée X2 : ");
+                shape->formes.ligne->x2 = getint(0, 200);
+                
+                printf("  Nouvelle coordonnée Y2 : ");
+                shape->formes.ligne->y2 = getint(0, 200);
+                break;
+                
+            default:
+                printf("Type de forme non supporté.\n");
+                return;
+        }  
+    }
+     // Modifier les couleurs
+    if (choix_modif == 2 || choix_modif == 3) {
+        choose_color(shape->color.couleur_fond, 
+                    shape->color.couleur_contour, 
+                    &shape->color.epaisseur_contour);
+    
+    printf("\n✅ Forme modifiée avec succès!\n\n");
+    }
 }
 
 void supprimer_forme(Liste *liste) {
@@ -222,3 +304,5 @@ void supprimer_forme(Liste *liste) {
     
     remove_shape_at(liste, index);
 }
+
+

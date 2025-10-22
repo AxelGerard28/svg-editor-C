@@ -13,16 +13,16 @@ int main(void)
     Liste *liste = create_liste();
     
     printf(BLUE "\n╔════════════════════════════════════════╗\n" RESET);
-    printf(BLUE "║    Bienvenue dans l'éditeur SVG !     ║\n" RESET);
+    printf(BLUE "║    Bienvenue dans l'éditeur SVG !      ║\n" RESET);
     printf(BLUE "╚════════════════════════════════════════╝\n" RESET);
     
     while (1) {
         menu_principal();
-        int choix = getint(0, 4);
+        int choix = getint(0, 5);
         
         switch (choix) {
             case 0:
-                printf(YELLOW "\nAu revoir! 👋\n" RESET);
+                printf(YELLOW "\nAu revoir\n" RESET);
                 free_liste(liste);
                 return 0;
                 
@@ -41,8 +41,12 @@ int main(void)
             case 3:
                 modifier_forme(liste);
                 break;
-                
-            case 4:
+
+            /*case 4:
+                change_color(liste);
+                break;
+            */
+            case 5:
                 supprimer_forme(liste);
                 break;
                 
